@@ -1,0 +1,26 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: rsschoolaws
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: aws-shop-backend
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: ProductService
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-west-1
+  stage: dev
+
+functions:
+  getProductList:
+    handler: handler.getProductList
+    events:
+      - httpApi:
+          path: /products
+          method: get
+  getProductById:
+    handler: handler.getProductById
+    events:
+      - httpApi:
+          path: /products/{productId}
+          method: get
